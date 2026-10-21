@@ -3,7 +3,6 @@ databaseChangeLog:
       id: 20261021-1
       author: wegrow
       changes:
-
         - createTable:
             tableName: department
             columns:
@@ -19,14 +18,9 @@ databaseChangeLog:
                   type: VARCHAR(255)
                   constraints:
                     nullable: false
-                    unique: true
               - column:
-                  name: code
-                  type: VARCHAR(50)
-                  constraints:
-                    nullable: false
-                    unique: true
-
+                  name: description
+                  type: VARCHAR(500)
 
         - createTable:
             tableName: employee
@@ -38,6 +32,12 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
+              - column:
+                  name: matricule
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+                    unique: true
               - column:
                   name: first_name
                   type: VARCHAR(255)
@@ -55,8 +55,11 @@ databaseChangeLog:
                     nullable: false
                     unique: true
               - column:
-                  name: phone
-                  type: VARCHAR(50)
+                  name: position
+                  type: VARCHAR(255)
+              - column:
+                  name: hire_date
+                  type: DATE
               - column:
                   name: role
                   type: VARCHAR(50)
@@ -68,8 +71,14 @@ databaseChangeLog:
                   constraints:
                     foreignKeyName: fk_employee_department
                     references: department(id)
+              - column:
+                  name: manager_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_employee_manager
+                    references: employee(id)
 
-
+        # Table Contract
         - createTable:
             tableName: contract
             columns:
@@ -81,7 +90,7 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: contract_type
+                  name: type
                   type: VARCHAR(50)
                   constraints:
                     nullable: false
@@ -94,8 +103,8 @@ databaseChangeLog:
                   name: end_date
                   type: DATE
               - column:
-                  name: salary
-                  type: DECIMAL(10,2)
+                  name: gross_salary
+                  type: DECIMAL(12,2)
                   constraints:
                     nullable: false
               - column:
@@ -103,11 +112,10 @@ databaseChangeLog:
                   type: BIGINT
                   constraints:
                     nullable: false
-                    unique: true
                     foreignKeyName: fk_contract_employee
                     references: employee(id)
 
-
+        # Table LeaveType
         - createTable:
             tableName: leave_type
             columns:
@@ -120,12 +128,12 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: name
-                  type: VARCHAR(100)
+                  type: VARCHAR(255)
                   constraints:
                     nullable: false
                     unique: true
               - column:
-                  name: default_days
+                  name: days_per_year
                   type: INT
                   constraints:
                     nullable: false
@@ -152,21 +160,35 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: status
-                  type: VARCHAR(30)
+                  name: working_days
+                  type: INT
                   constraints:
                     nullable: false
+              - column:
+                  name: reason
+                  type: VARCHAR(500)
+              - column:
+                  name: status
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: manager_comment
+                  type: VARCHAR(500)
+              - column:
+                  name: decision_date
+                  type: DATE
               - column:
                   name: employee_id
                   type: BIGINT
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_leave_employee
+                    foreignKeyName: fk_leaverequest_employee
                     references: employee(id)
               - column:
                   name: leave_type_id
                   type: BIGINT
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_leave_type
+                    foreignKeyName: fk_leaverequest_leavetype
                     references: leave_type(id)
