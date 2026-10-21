@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20261021-2
+      author: wegrow
+      changes:
+        - insert:
+            tableName: department
+            columns:
+              - column: { name: name, value: "Ingénierie & Développement" }
+              - column: { name: description, value: "Département technique et IT" }
+        - insert:
+            tableName: department
+            columns:
+              - column: { name: name, value: "Ressources Humaines" }
+              - column: { name: description, value: "Gestion du personnel" }
+
+        - insert:
+            tableName: leave_type
+            columns:
+              - column: { name: name, value: "Congé Payé" }
+              - column: { name: days_per_year, valueNumeric: 22 }
+        - insert:
+            tableName: leave_type
+            columns:
+              - column: { name: name, value: "Congé Maladie" }
+              - column: { name: days_per_year, valueNumeric: 10 }
+
+        - insert:
+            tableName: employee
+            columns:
+              - column: { name: matricule, value: "EMP001" }
+              - column: { name: first_name, value: "Karim" }
+              - column: { name: last_name, value: "El Amrani" }
+              - column: { name: email, value: "karim.amrani@wegrow.com" }
+              - column: { name: position, value: "Engineering Manager" }
+              - column: { name: hire_date, value: "2023-01-15" }
+              - column: { name: role, value: "MANAGER" }
+              - column: { name: department_id, valueNumeric: 1 }
+
+        - insert:
+            tableName: employee
+            columns:
+              - column: { name: matricule, value: "EMP002" }
+              - column: { name: first_name, value: "Youssef" }
+              - column: { name: last_name, value: "Bennani" }
+              - column: { name: email, value: "youssef.bennani@wegrow.com" }
+              - column: { name: position, value: "Développeur FullStack" }
+              - column: { name: hire_date, value: "2024-03-01" }
+              - column: { name: role, value: "EMPLOYE" }
+              - column: { name: department_id, valueNumeric: 1 }
+              - column: { name: manager_id, valueNumeric: 1 }
+
+        - insert:
+            tableName: contract
+            columns:
+              - column: { name: type, value: "CDI" }
+              - column: { name: start_date, value: "2024-03-01" }
+              - column: { name: gross_salary, valueNumeric: 12000.00 }
+              - column: { name: employee_id, valueNumeric: 2 }

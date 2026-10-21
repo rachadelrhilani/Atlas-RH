@@ -3,6 +3,7 @@ databaseChangeLog:
       id: 20261021-1
       author: wegrow
       changes:
+        # Table Department
         - createTable:
             tableName: department
             columns:
@@ -22,6 +23,7 @@ databaseChangeLog:
                   name: description
                   type: VARCHAR(500)
 
+        # Table Employee
         - createTable:
             tableName: employee
             columns:
