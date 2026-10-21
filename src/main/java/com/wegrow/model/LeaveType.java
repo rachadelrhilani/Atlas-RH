@@ -17,8 +17,8 @@ public class LeaveType {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String name; // Paid Leave, Sick Leave...
+    private String name;
 
-    @Column(name = "default_days", nullable = false)
-    private Integer defaultDays;
+    @Column(name = "days_per_year", nullable = false)
+    private Integer daysPerYear;
 }

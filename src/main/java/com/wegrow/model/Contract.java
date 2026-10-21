@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "contract")
-@Getter 
+@Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,8 +19,9 @@ public class Contract {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "contract_type", nullable = false)
-    private String contractType; 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ContractType type;
 
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
@@ -28,10 +29,10 @@ public class Contract {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @Column(nullable = false)
-    private BigDecimal salary;
+    @Column(name = "gross_salary", nullable = false)
+    private BigDecimal grossSalary;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id", nullable = false, unique = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
 }
