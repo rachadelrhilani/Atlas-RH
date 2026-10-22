@@ -45,7 +45,6 @@ public class Employee {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    // Relation auto-référencée (Manager <-> Équipe)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id")
     private Employee manager;
