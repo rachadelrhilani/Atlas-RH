@@ -10,7 +10,9 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring")
 public interface EmployeeMapper {
 
+    @Mapping(source = "department.id", target = "departmentId")
     @Mapping(source = "department.name", target = "departmentName")
+    @Mapping(source = "manager.id", target = "managerId")
     @Mapping(target = "managerFullName", expression = "java(entity.getManager() != null ? entity.getManager().getFirstName() + ' ' + entity.getManager().getLastName() : null)")
     EmployeeResponseDTO toDto(Employee entity);
 
@@ -25,5 +27,8 @@ public interface EmployeeMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "department", ignore = true)
     @Mapping(target = "manager", ignore = true)
+    @Mapping(target = "equipe", ignore = true)
+    @Mapping(target = "contrats", ignore = true)
+    @Mapping(target = "demandes", ignore = true)
     void updateEntityFromDto(EmployeeRequestDTO dto, @MappingTarget Employee entity);
 }
