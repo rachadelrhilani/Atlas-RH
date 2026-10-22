@@ -1,4 +1,3 @@
-// ContractResponseDTO.java
 package com.wegrow.dto.response;
 
 import com.wegrow.model.ContractType;

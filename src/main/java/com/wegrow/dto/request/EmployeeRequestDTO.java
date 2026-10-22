@@ -24,6 +24,8 @@ public class EmployeeRequestDTO {
     private String email;
 
     private String position;
+    
+    @NotNull(message = "La date d'embauche est obligatoire")
     private LocalDate hireDate;
 
     @NotNull(message = "Le rôle est obligatoire")

@@ -18,8 +18,8 @@ public class ContractRequestDTO {
 
     private LocalDate endDate;
 
-    @NotNull(message = "Le salaire est obligatoire")
-    @Positive(message = "Le salaire doit être positif")
+    @NotNull(message = "Le salaire brut est obligatoire")
+    @Positive(message = "Le salaire brut doit être supérieur à zéro")
     private BigDecimal grossSalary;
 
     @NotNull(message = "L'ID de l'employé est obligatoire")

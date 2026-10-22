@@ -16,6 +16,8 @@ public class EmployeeResponseDTO {
     private LocalDate hireDate;
     private Role role;
 
+    private Long departmentId;
     private String departmentName;
+    private Long managerId;
     private String managerFullName;
 }
