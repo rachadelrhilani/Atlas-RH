@@ -1,0 +1,17 @@
+target/
+.git/
+.gitignore
+.gitattributes
+.idea/
+.vscode/
+.settings/
+.classpath
+.project
+*.iml
+*.log
+.env
+.env.*
+!.env.example
+Dockerfile
+compose.yaml
+HELP.md
