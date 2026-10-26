@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/departments")
-@Tag(name = "1. Départements (RH)", description = "Gestion des départements de l'entreprise (US1)")
+@Tag(name = "1. Départements (RH)", description = "Gestion des départements de l'entreprise")
 public class DepartmentController {
 
     private final DepartmentService departmentService;

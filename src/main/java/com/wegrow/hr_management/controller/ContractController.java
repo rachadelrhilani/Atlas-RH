@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/contracts")
-@Tag(name = "3. Contrats (RH)", description = "Gestion des contrats de travail (US3)")
+@Tag(name = "3. Contrats (RH)", description = "Gestion des contrats de travail")
 public class ContractController {
 
     private final ContractService contractService;

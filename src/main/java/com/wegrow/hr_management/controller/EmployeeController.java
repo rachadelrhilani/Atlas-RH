@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/employees")
-@Tag(name = "2. Employés (RH)", description = "Gestion des fiches employés et recherches (US2)")
+@Tag(name = "2. Employés (RH)", description = "Gestion des fiches employés et recherches")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
