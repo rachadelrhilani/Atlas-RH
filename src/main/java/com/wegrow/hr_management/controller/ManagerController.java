@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/manager/{managerId}")
-@Tag(name = "4. Espace Manager (US4)", description = "Gestion et approbation des congés de l'équipe par le Manager")
+@Tag(name = "4. Espace Manager", description = "Gestion et approbation des congés de l'équipe par le Manager")
 public class ManagerController {
 
     private final LeaveRequestService leaveRequestService;

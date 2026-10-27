@@ -22,12 +22,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     Page<Employee> findByDepartmentId(Long departmentId, Pageable pageable);
 
-    // Recherche par nom ou prénom (nom court avec @Query)
     @Query("SELECT e FROM Employee e WHERE LOWER(e.firstName) LIKE LOWER(CONCAT('%', :name, '%')) " +
            "OR LOWER(e.lastName) LIKE LOWER(CONCAT('%', :name, '%'))")
     Page<Employee> searchByName(@Param("name") String name, Pageable pageable);
 
-    // Recherche par département ET par nom/prénom (nom court avec @Query)
     @Query("SELECT e FROM Employee e WHERE e.department.id = :deptId " +
            "AND (LOWER(e.firstName) LIKE LOWER(CONCAT('%', :name, '%')) " +
            "OR LOWER(e.lastName) LIKE LOWER(CONCAT('%', :name, '%')))")
