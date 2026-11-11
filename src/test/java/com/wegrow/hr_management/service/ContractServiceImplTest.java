@@ -65,7 +65,7 @@ class ContractServiceImplTest{
     @DisplayName("Succès - Créer un contrat pour un employé sans contrat actif")
     void createContract_Success(){
         when(employeeRepository.findById(1L)).thenReturn(Optional.of(employee));
-        when(contractRepository.findByEmployeeId(1L)).thenReturn(List.of()); // Aucun contrat existant
+        when(contractRepository.findByEmployeeId(1L)).thenReturn(List.of());
         when(contractMapper.toEntity(requestDTO)).thenReturn(new Contract());
         when(contractRepository.save(any(Contract.class))).thenReturn(activeContract);
         when(contractMapper.toDto(any())).thenReturn(new ContractResponseDTO());
