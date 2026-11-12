@@ -78,7 +78,6 @@ class LeaveRequestServiceImplTest{
             LeaveRequestCreateDTO dto = new LeaveRequestCreateDTO();
             dto.setEmployeeId(2L);
             dto.setLeaveTypeId(1L);
-            // Du Lundi 02-11-2026 au Dimanche 08-11-2026 = 5 jours ouvrés
             dto.setStartDate(LocalDate.of(2026, 11, 2));
             dto.setEndDate(LocalDate.of(2026, 11, 8));
 
@@ -106,7 +105,6 @@ class LeaveRequestServiceImplTest{
             dto.setStartDate(LocalDate.of(2026, 11, 2));
             dto.setEndDate(LocalDate.of(2026, 11, 6)); // 5 jours
 
-            // Déjà 20 jours approuvés sur 22 alloués
             LeaveRequest approved = new LeaveRequest();
             approved.setLeaveType(leaveType);
             approved.setWorkingDays(20);
@@ -145,7 +143,7 @@ class LeaveRequestServiceImplTest{
         @Test
         @DisplayName("Erreur - Impossible de retraiter une demande déjà validée (IllegalStateException)")
         void processDecision_AlreadyProcessed_ThrowsException(){
-            leaveRequest.setStatus(LeaveStatus.APPROUVEE); // Déjà traitée
+            leaveRequest.setStatus(LeaveStatus.APPROUVEE); 
 
             LeaveApprovalDTO approvalDTO = new LeaveApprovalDTO();
             approvalDTO.setStatus(LeaveStatus.REFUSEE);

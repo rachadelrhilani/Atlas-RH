@@ -23,6 +23,8 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -210,4 +212,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return balances;
     }
+   /*  public Map<Long,Integer> jouremploye(){
+        return leaveRequestRepository.findAll().stream()
+        .filter(l -> l.getStatus() == LeaveStatus.APPROUVEE)
+        .collect(Collectors.groupingBy(l->l.getEmployee.getId(),Collectors.summingInt(LeaveRequest::getWorkingDays)));
+    } */
 }
