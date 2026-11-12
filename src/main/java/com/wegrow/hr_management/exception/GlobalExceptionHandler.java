@@ -28,6 +28,20 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler({IllegalStateException.class, IllegalArgumentException.class})
+    public ResponseEntity<ErrorDetails> handleBusinessRuleExceptions(
+            RuntimeException ex, WebRequest request) {
+
+        ErrorDetails errorDetails = new ErrorDetails(
+                LocalDateTime.now(),
+                ex.getMessage(),
+                request.getDescription(false),
+                HttpStatus.BAD_REQUEST.name()
+        );
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    
     @ExceptionHandler(ResourceAlreadyExistsException.class)
     public ResponseEntity<ErrorDetails> handleResourceAlreadyExistsException(
             ResourceAlreadyExistsException ex, WebRequest request) {
