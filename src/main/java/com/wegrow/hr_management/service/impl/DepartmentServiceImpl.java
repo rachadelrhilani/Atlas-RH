@@ -7,6 +7,7 @@ import com.wegrow.hr_management.exception.ResourceNotFoundException;
 import com.wegrow.hr_management.mapper.DepartmentMapper;
 import com.wegrow.hr_management.model.Department;
 import com.wegrow.hr_management.repository.DepartmentRepository;
+import com.wegrow.hr_management.repository.EmployeeRepository;
 import com.wegrow.hr_management.service.DepartmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -20,11 +21,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class DepartmentServiceImpl implements DepartmentService {
 
     private final DepartmentRepository departmentRepository;
+    private final EmployeeRepository employeeRepository;
     private final DepartmentMapper departmentMapper;
 
-    public DepartmentServiceImpl(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper) {
+    public DepartmentServiceImpl(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper,EmployeeRepository employeeRepository) {
         this.departmentRepository = departmentRepository;
         this.departmentMapper = departmentMapper;
+        this.employeeRepository = employeeRepository;
     }
 
     @Override
@@ -70,7 +73,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         Department department = departmentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Département non trouvé avec l'ID : " + id));
 
-        if (department.getEmployees() != null && !department.getEmployees().isEmpty()) {
+        if (employeeRepository.existsByDepartmentId(id)) {
             throw new IllegalStateException("Impossible de supprimer un département qui contient des employés.");
         }
 

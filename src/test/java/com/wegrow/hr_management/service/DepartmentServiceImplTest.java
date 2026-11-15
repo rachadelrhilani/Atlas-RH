@@ -6,8 +6,8 @@ import com.wegrow.hr_management.exception.ResourceAlreadyExistsException;
 import com.wegrow.hr_management.exception.ResourceNotFoundException;
 import com.wegrow.hr_management.mapper.DepartmentMapper;
 import com.wegrow.hr_management.model.Department;
-import com.wegrow.hr_management.model.Employee;
 import com.wegrow.hr_management.repository.DepartmentRepository;
+import com.wegrow.hr_management.repository.EmployeeRepository;
 import com.wegrow.hr_management.service.impl.DepartmentServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -34,6 +34,9 @@ class DepartmentServiceImplTest {
 
     @Mock
     private DepartmentRepository departmentRepository;
+
+    @Mock
+    private EmployeeRepository employeeRepository;
 
     @Mock
     private DepartmentMapper departmentMapper;
@@ -179,9 +182,8 @@ class DepartmentServiceImplTest {
         @Test
         @DisplayName("Succès - Supprimer un département vide (sans employés)")
         void delete_EmptyDepartment_Success() {
-            department.setEmployees(List.of());
-
             when(departmentRepository.findById(1L)).thenReturn(Optional.of(department));
+            when(employeeRepository.existsByDepartmentId(1L)).thenReturn(false);
 
             assertDoesNotThrow(() -> departmentService.delete(1L));
             verify(departmentRepository).delete(department);
@@ -190,11 +192,8 @@ class DepartmentServiceImplTest {
         @Test
         @DisplayName("Erreur - Interdiction de supprimer un département contenant des employés")
         void delete_DepartmentWithEmployees_ThrowsException() {
-            Employee employee = new Employee();
-            employee.setId(10L);
-            department.setEmployees(List.of(employee)); 
-
             when(departmentRepository.findById(1L)).thenReturn(Optional.of(department));
+            when(employeeRepository.existsByDepartmentId(1L)).thenReturn(true);
 
             assertThrows(IllegalStateException.class, () -> departmentService.delete(1L));
             verify(departmentRepository, never()).delete(any());
